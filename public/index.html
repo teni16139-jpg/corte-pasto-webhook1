@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Corte de Pasto</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #000;
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 24px;
+    }
+    .card {
+      background: #111;
+      border: 1px solid #4B39EF;
+      border-radius: 16px;
+      padding: 40px 32px;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+    .icon { font-size: 64px; margin-bottom: 16px; }
+    h1 { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+    p { color: #aaa; font-size: 15px; line-height: 1.5; margin-bottom: 32px; }
+    .btn {
+      display: block;
+      background: #4B39EF;
+      color: #fff;
+      text-decoration: none;
+      padding: 16px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .btn.secondary {
+      background: transparent;
+      border: 1px solid #4B39EF;
+      color: #4B39EF;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="icon">🌿</div>
+    <h1>Corte de Pasto</h1>
+    <p id="msg">Abriendo la aplicación...</p>
+    <a id="btn-app" class="btn" href="#" style="display:none">Abrir en la app</a>
+    <a id="btn-download" class="btn secondary" href="YOUR_PLAY_STORE_LINK" style="display:none">
+      Descargar la app
+    </a>
+  </div>
+
+  <script>
+    const path = window.location.pathname;
+    const parts = path.split('/');
+    const uid = parts[parts.length - 1];
+
+    const deepLink = 'cortepasto://cliente/' + uid;
+    const fallbackDelay = 2000;
+
+    if (uid && uid !== '' && uid !== 'cliente') {
+      // Intentar abrir la app
+      window.location = deepLink;
+
+      setTimeout(() => {
+        // Si después de 2s sigue en el browser, la app no está instalada
+        document.getElementById('msg').textContent =
+          '¿No tenés la app instalada? Descargala para escanear este QR.';
+        document.getElementById('btn-app').href = deepLink;
+        document.getElementById('btn-app').style.display = 'block';
+        document.getElementById('btn-download').style.display = 'block';
+      }, fallbackDelay);
+    } else {
+      document.getElementById('msg').textContent =
+        'QR inválido. Pedile al cliente que genere uno nuevo desde la app.';
+    }
+  </script>
+</body>
+</html>
