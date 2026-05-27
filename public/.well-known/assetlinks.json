@@ -1,0 +1,10 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.servicioadomicilio.app",
+    "sha256_cert_fingerprints": [
+      "C5:F6:8B:C3:7F:32:BA:E8:CA:84:DB:67:08:7A:94:E7:B6:D0:C8:9C:CD:6D:6A:8A:28:D1:0F:0C:33:91:05:36"
+    ]
+  }
+}]
